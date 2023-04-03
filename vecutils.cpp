@@ -1,37 +1,30 @@
 
-
+#include "vecutils.h"
 #include<math.h>
 
 
-struct vec3
-{
-    float x, y, z;
-};
-
-struct point3
-{
-    float x, y, z;
-};
 
 
-float calculateVectorLength(vec3 v)
+
+float calculateVec3BaseLength(vec3 v)
 {
     return sqrt(v.x * v.x + v.y * v.y);
 }
 
 
-float calculateTriangleBase(vec3 v1, vec3 v2)
+float calculateTriangleBase(point3 v1, point3 v2)
 {
     return sqrt((v1.x - v2.x) * (v1.x - v2.x) + (v1.y - v2.y) * (v1.y - v2.y));
 }
 
 void normaliseVector(vec3& v)
 {
-    float length = calculateVectorLength(v);
+    float length = calculateVec3Length(v);
     if (length)
     {
         v.x = v.x / length;
         v.y = v.y / length;
+        v.z = v.z / length;
     }
 }
 

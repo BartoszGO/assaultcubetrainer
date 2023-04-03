@@ -11,6 +11,10 @@ struct point3
     float x, y, z;
 };
 
+struct angle
+{
+    float pitch, yaw;
+};
 
 
 float calculateVec3BaseLength(vec3 v)
