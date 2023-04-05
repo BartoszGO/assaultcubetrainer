@@ -1,13 +1,15 @@
-#include <TlHelp32.h>
-#include "Process.h"
+
+
 #include <iostream>
-#include <vector>
-#include<Windows.h>
+#include "Process.h"
+#include<tlhelp32.h>
+
 
 Process::Process(const wchar_t* procName, const wchar_t* modName)
 {
 	_procName = procName;
 	_modName = modName;
+
 
 	getProcessId();
 	getModuleBaseAddress();
@@ -27,7 +29,7 @@ void Process::getProcessId()
 		{
 			do
 			{
-				if (!_wcsicmp(procName, procEntry.szExeFile))
+				if (!_wcsicmp(_procName, procEntry.szExeFile))
 				{
 					procId = procEntry.th32ProcessID;
 					break;
@@ -42,6 +44,7 @@ void Process::getProcessId()
 
 void Process::getModuleBaseAddress()
 {
+	
 	uintptr_t modBaseAddr = NULL;
 	HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, _procId);
 	MODULEENTRY32 modEntry;
@@ -61,6 +64,7 @@ void Process::getModuleBaseAddress()
 			} while (Module32Next(hSnap, &modEntry));
 		}
 	}
+	
 	CloseHandle(hSnap);
 	_mainModulePtr = modBaseAddr;
 }
@@ -68,13 +72,19 @@ void Process::getModuleBaseAddress()
 void Process::openProcess()
 {
 	_hProc = OpenProcess(PROCESS_ALL_ACCESS, false, _procId);
+		
 }
 
+void Process::printhProc()
+{
+	std::cout << "printing hProc:" <<std::hex<<_hProc << std::endl;
+}
 
 
 
 bool Process::writeMemory(uintptr_t addr, void* buffer, unsigned int size)
 {
+
 	return WriteProcessMemory(_hProc, (LPVOID)addr, (LPCVOID)buffer, size, NULL);
 }
 
@@ -139,5 +149,6 @@ void Process::NopEx(HANDLE hProc, LPVOID Addr, SIZE_T size)
 
 uintptr_t Process::getMainModuleAddr()
 {
+	printhProc();
 	return _mainModulePtr;
 }

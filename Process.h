@@ -1,14 +1,11 @@
 #pragma once
-
 #include <Windows.h>
 #include <vector>
-
 
 class Process {
 
 public:
 	Process(const wchar_t* procName, const wchar_t* modName);
-	~Process();
 
 	bool writeMemory(uintptr_t addr, void* buffer, unsigned int size);
 	bool readMemory(uintptr_t addr, void* buffer, unsigned int size);
@@ -17,7 +14,7 @@ public:
 	void PatchEx(HANDLE hProc, LPVOID Addr, LPCVOID buffer, SIZE_T size);
 	void NopEx(HANDLE hProc, LPVOID Addr, SIZE_T size);
 	uintptr_t getMainModuleAddr();
-
+	void printhProc();
 	
 private:
 	const wchar_t* _procName;
@@ -28,7 +25,7 @@ private:
 	
 	
 	void getProcessId();
-	void getModuleBaseAddress(DWORD procId, const wchar_t* modName);
+	void getModuleBaseAddress();
 	void openProcess();
 
 

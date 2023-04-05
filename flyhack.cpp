@@ -1,6 +1,6 @@
-
+/*
 #include "vecutils.h"
-#include <WinUser.h>
+
 
 void movePlayer()
 {
@@ -53,3 +53,6 @@ void movePlayer()
 
     writeMemory(playerBasePtr + offsets.pos, &newPos, sizeof(newPos));
 }
+
+
+*/

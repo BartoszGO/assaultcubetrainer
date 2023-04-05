@@ -3,26 +3,27 @@
 #include "Process.h"
 #include <iostream>
 
-struct angle;
-struct point3;
-
+#include "vecutils.h"
 class Entity
 {
 public:
-	Entity(Process process, bool isMainPlayer = false);
-	~Entity();
+	Entity();
+	Entity(Process* process);
 	int32_t getHealth();
 	point3 getPos();
 	angle getAngles();
+	bool setAngles(angle angles);
 	
 	void setEntBaseAddr(uintptr_t addr);
+	uintptr_t getEntBaseAddr();
+
+
+	Entity& operator= (const Entity& entity);
+
 
 private:
 	uintptr_t _entBasePtr;
-	Process& _process;
-	uintptr_t _mainModuleAddr;
-
-	void getMainPlayerBaseAddr();
+	Process* _process;
 
 
 };
