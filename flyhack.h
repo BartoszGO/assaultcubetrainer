@@ -1,5 +1,4 @@
-
-/*
 #pragma once
-void movePlayer();
-*/
+
+#include "Game.h"
+void movePlayer(Game game);

@@ -5,10 +5,10 @@
 #include<tlhelp32.h>
 
 
-Process::Process(const wchar_t* procName, const wchar_t* modName)
+Process::Process()
 {
-	_procName = procName;
-	_modName = modName;
+	_procName =  L"ac_client.exe";;
+	_modName = L"ac_client.exe";
 
 
 	getProcessId();

@@ -57,13 +57,9 @@ uintptr_t Entity::getEntBaseAddr()
 }
 
 
-
-Entity& Entity::operator = (const Entity& entity)
+bool Entity::setPos(point3 pos)
 {
-	_entBasePtr = entity._entBasePtr;
-	_process = entity._process;
-
-	return *this;
+	return _process->writeMemory(_entBasePtr + offsets::pos, &pos, sizeof(pos));
 }
 
 

@@ -3,10 +3,8 @@
 #include <iostream>
 #define _USE_MATH_DEFINES
 #include <math.h>
-//#include <WinUser.h>
 
 #include "vecutils.h"
-#include "Process.h"
 #include "Entity.h"
 #include "Game.h"
 
@@ -40,7 +38,7 @@ Entity calculateMinDistanceEntity(Game game)
 
 }
 
-void setPlayerAngleToEntity(Process process, Game game, Entity entity)
+void setPlayerAngleToEntity(Game game, Entity entity)
 {
     float destinationPitch = 0;
     float destinationYaw = 0;
@@ -52,21 +50,19 @@ void setPlayerAngleToEntity(Process process, Game game, Entity entity)
     entityPos = entity.getPos();
 
     destinationPitch = fmod(((atan2(playerPos.y - entityPos.y, playerPos.x - entityPos.x) * 180 / M_PI)) + 270.0f, 360.0f);
-    destinationYaw = (atan2( calculatePoint3Distance(playerPos, entityPos) , playerPos.z - entityPos.z ) * 180 / M_PI) - 90.0f;
+    destinationYaw = (atan2(calculateTriangleBase(playerPos, entityPos) , playerPos.z - entityPos.z ) * 180 / M_PI) - 90.0f;
 
     player.setAngles({ destinationPitch,destinationYaw });
 }
 
-void setPlayerAngleToMinDistanceEntity(Process process, Game game)
+void setPlayerAngleToMinDistanceEntity(Game game)
 { 
-    
-    Entity ent = calculateMinDistanceEntity(game);
-    setPlayerAngleToEntity(process, game ,ent);
+    setPlayerAngleToEntity(game , calculateMinDistanceEntity(game));
 }
 
 
 
-Entity getClosestEntityToCrosshair(Process process, Game game)
+Entity getClosestEntityToCrosshair(Game game)
 {
     float pitch = 0, yaw = 0, angleModifier = 0;
     float  xMovementSum = 0, yMovementSum = 0;
@@ -126,11 +122,7 @@ Entity getClosestEntityToCrosshair(Process process, Game game)
 
 
 }
-void setPlayerAngleToMinCrosshairDistanceEntity(Process process, Game game)
+void setPlayerAngleToMinCrosshairDistanceEntity(Game game)
 {
-
-   
-     setPlayerAngleToEntity(process, game, getClosestEntityToCrosshair(process, game));
-
-
+    setPlayerAngleToEntity(game, getClosestEntityToCrosshair(game));
 }

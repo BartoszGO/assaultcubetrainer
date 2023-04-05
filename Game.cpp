@@ -5,10 +5,6 @@
 Game::Game(Process& process) : _process(process)
 {
 	_moduleAddr = _process.getMainModuleAddr();
-	std::cout << "game constr:";
-	_process.printhProc();
-	
-	
 }
 
 

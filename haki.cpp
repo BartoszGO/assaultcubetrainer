@@ -7,21 +7,36 @@
 #include "Process.h"
 #include "Game.h"
 #include "aimhack.h"
+#include "flyhack.h"
 
-
+#include "buttonconfig.h"
 
 
 int main()
 {
-    const wchar_t* procName = L"ac_client.exe";
-    Process process(procName, procName);
+    
+    Process process;
     Game game(process);
+    bool isFlyingActive = false;
     while (true)
     {
 
-        while (GetAsyncKeyState(VK_RBUTTON) < 0)
+        while (GetAsyncKeyState(AIMBOT_BTN) < 0)
         {
-            setPlayerAngleToMinDistanceEntity(process, game);
+            setPlayerAngleToMinDistanceEntity(game);
+        }
+
+        if (GetAsyncKeyState(FLYHACK_BTN)) 
+        {
+            isFlyingActive? std::cout << "Flying is active!" << std::endl : std::cout << "Flying is not active!" << std::endl;
+            
+            isFlyingActive = !isFlyingActive;
+        }
+
+
+        if (isFlyingActive)
+        {
+            movePlayer(game);
         }
 
         Sleep(10);

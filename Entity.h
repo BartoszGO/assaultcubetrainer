@@ -11,14 +11,12 @@ public:
 	Entity(Process* process);
 	int32_t getHealth();
 	point3 getPos();
+	bool setPos(point3 pos);
 	angle getAngles();
 	bool setAngles(angle angles);
 	
 	void setEntBaseAddr(uintptr_t addr);
 	uintptr_t getEntBaseAddr();
-
-
-	Entity& operator= (const Entity& entity);
 
 
 private:

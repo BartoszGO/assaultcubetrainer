@@ -5,7 +5,7 @@
 class Process {
 
 public:
-	Process(const wchar_t* procName, const wchar_t* modName);
+	Process();
 
 	bool writeMemory(uintptr_t addr, void* buffer, unsigned int size);
 	bool readMemory(uintptr_t addr, void* buffer, unsigned int size);
