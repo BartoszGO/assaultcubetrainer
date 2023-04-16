@@ -25,7 +25,7 @@ int main()
             setPlayerAngleToMinDistanceEntity(game);
         }
 
-        if (GetAsyncKeyState(FLYHACK_BTN)) 
+        if (GetAsyncKeyState(FLYHACK_BTN) 0x01 )
         {
             isFlyingActive? std::cout << "Flying is active!" << std::endl : std::cout << "Flying is not active!" << std::endl;
             
