@@ -8,7 +8,6 @@
 #include "Game.h"
 #include "aimhack.h"
 #include "flyhack.h"
-
 #include "buttonconfig.h"
 
 
